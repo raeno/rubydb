@@ -1,4 +1,4 @@
-require 'rspec'
+require './specs/spec_helper'
 require './rubydb'
 
 describe RubyDB do
@@ -25,7 +25,6 @@ describe Table do
 		it 'adds row to db' do
 			expect {
 				subject.create '1', 'Test'
-
 			}.should change(subject, :rows_count).by(1)
 		end
 	end
@@ -50,26 +49,13 @@ describe Table do
 
 			context "when we then delete two rows" do
 				before do
+					table.delete '1'
 					table.delete '2'
-					table.delete '3'
 				end
 				it 'returns 1 as rows_count' do
 					table.rows_count.should == 1
 				end
 			end
 		end
-	end
-
-end
-
-describe Row do
-	subject { Row.new('key', 'NotSoBigValue') }
-
-	it { should respond_to :key }
-	it { should respond_to :value }
-	it { should respond_to :live }
-
-	it 'live by default' do
-		subject.live.should be_true
 	end
 end
