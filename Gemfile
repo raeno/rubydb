@@ -5,3 +5,5 @@ gem 'sinatra'
 gem 'thin'
 
 gem 'rspec'
+
+gem 'rack-test'

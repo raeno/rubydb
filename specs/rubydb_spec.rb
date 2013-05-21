@@ -5,10 +5,13 @@ describe RubyDB do
 
 	subject { RubyDB.new }
 
-	it { should respond_to :tables }
+	it { should respond_to :table_names }
+	it { should respond_to :create_table }
+	it { should respond_to :drop_table }
+	it { should respond_to :commit }
 
 	specify 'fresh DB should contain no tables' do
-		subject.tables.should be_empty
+		subject.table_names.should be_empty
 	end
 end
 
@@ -25,7 +28,7 @@ describe Table do
 		it 'adds row to db' do
 			expect {
 				subject.create '1', 'Test'
-			}.should change(subject, :rows_count).by(1)
+			}.to change(subject, :rows_count).by(1)
 		end
 	end
 
